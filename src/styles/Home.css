@@ -1,184 +1,151 @@
-/* Layouts base */
-.section-title {
-  font-size: 1.8rem;
-  margin: 0 0 8px;
-  color: #1f2937;
-}
-
-.section-subtitle {
-  color: #6b7280;
-  margin: 0 0 24px;
-}
-
-/* Hero */
+/* HERO */
 .hero {
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 28px;
-  margin: 16px 0 24px;
+  background: linear-gradient(180deg, #fff, #f3f6fb);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: var(--s6) var(--s5);
+  margin: var(--s5) 0
 }
 
 .hero__title {
-  margin: 0 0 8px;
-  font-size: 2rem;
-  color: #111827;
+  margin: 0 0 var(--s2);
+  font-size: 2.2rem
 }
 
 .hero__subtitle {
   margin: 0;
-  color: #4b5563;
+  color: var(--muted)
 }
 
-/* Features */
+/* FEATURES */
+.features .section-title {
+  margin-bottom: var(--s3)
+}
+
 .features__grid {
   list-style: none;
+  margin: 0;
   padding: 0;
-  margin: 12px 0 28px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  gap: var(--s3);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
 }
 
 .feature-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: var(--s4);
+  box-shadow: var(--shadow)
 }
 
 .feature-card h3 {
   margin: 0 0 6px;
-  font-size: 1.1rem;
-  color: #111827;
+  font-size: 1.1rem
 }
 
 .feature-card p {
   margin: 0;
-  color: #4b5563;
+  color: var(--muted)
 }
 
-/* Products */
+/* PRODUCTS */
 .products__header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 8px 0 12px;
+  margin: var(--s5) 0 var(--s3)
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin: 0
+}
+
+.section-subtitle {
+  margin: 6px 0 0;
+  color: var(--muted)
 }
 
 .products__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-  margin-bottom: 40px;
+  gap: var(--s4);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))
 }
 
 .product-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
-  transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: var(--shadow);
+  transition: transform .15s, box-shadow .15s
 }
 
 .product-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .06);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, .12)
 }
 
 .product-card__media {
+  background: #f2f5fb;
   display: grid;
   place-items: center;
-  padding: 16px;
-  background: #f9fafb;
+  padding: var(--s4)
 }
 
+/* Altura uniforme de imágenes */
 .product-card__media img {
-  max-width: 160px;
-  max-height: 160px;
+  width: 100%;
+  height: 180px;
   object-fit: contain;
+  max-width: 220px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .08))
 }
 
 .product-card__body {
-  padding: 14px 16px 16px;
+  padding: var(--s4)
 }
 
 .product-card__title {
+  margin: 0 0 var(--s1);
   font-size: 1rem;
-  margin: 0 0 8px;
-  color: #111827;
+  line-height: 1.35rem;
+  height: 2.7rem;
+  overflow: hidden
 }
 
 .product-card__price {
-  font-weight: 700;
-  color: #16a34a;
-  margin: 0 0 6px;
+  margin: 0 0 var(--s2);
+  font-weight: 800;
+  color: var(--ok)
 }
 
 .product-card__desc {
-  color: #6b7280;
+  color: var(--muted);
   font-size: .92rem;
   line-height: 1.35rem;
   height: 3.9rem;
-  /* ~3 líneas */
-  overflow: hidden;
+  overflow: hidden
 }
 
 .product-card__tag {
   display: inline-block;
-  margin-top: 8px;
-  font-size: .75rem;
-  color: #2563eb;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  margin-top: var(--s2);
+  font-size: .74rem;
+  color: #1d4ed8;
+  background: #eef2ff;
+  border: 1px solid #dde3ff;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: 999px
 }
 
 .product-card__actions {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: var(--s3)
 }
 
-/* Buttons */
-.btn {
-  border: 0;
-  border-radius: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn--primary {
-  background: #2563eb;
-  color: #fff;
-}
-
-.btn--secondary {
-  background: #111827;
-  color: #fff;
-}
-
-.btn--danger {
-  background: #dc2626;
-  color: #fff;
-}
-
-.btn--ghost {
-  background: transparent;
-  color: #6b7280;
-}
-
-.btn:disabled {
-  opacity: .6;
-  cursor: not-allowed;
-}
-
-/* Modal */
+/* MODAL */
 .modal {
   position: fixed;
   inset: 0;
@@ -186,17 +153,16 @@
   display: grid;
   place-items: center;
   padding: 16px;
-  z-index: 50;
+  z-index: 50
 }
 
 .modal__card {
-  width: 100%;
-  max-width: 720px;
-  background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
+  width: min(720px, 92%);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: var(--shadow)
 }
 
 .modal__header {
@@ -204,51 +170,57 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--line)
 }
 
 .form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  padding: 16px;
+  padding: 16px
 }
 
 .form__field {
   display: grid;
-  gap: 6px;
-}
-
-.form__field span {
-  font-size: .85rem;
-  color: #374151;
+  gap: 6px
 }
 
 .form input,
 .form textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  outline: none;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px
 }
 
 .form textarea {
-  min-height: 100px;
+  min-height: 110px;
   resize: vertical;
-  grid-column: 1 / -1;
+  grid-column: 1 / -1
 }
 
 .form__actions {
+  grid-column: 1 / -1;
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  grid-column: 1 / -1;
+  gap: 8px
 }
 
-/* Responsivo */
-@media (max-width: 640px) {
+/* FOOTER (si lo usás) */
+.site-footer {
+  margin-top: var(--s6);
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  background: #fff
+}
+
+.site-footer .container {
+  display: flex;
+  justify-content: center
+}
+
+@media (max-width:640px) {
   .form {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 }
