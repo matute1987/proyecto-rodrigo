@@ -1,0 +1,22 @@
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.error {
+  color: red;
+}
+
+.popup-edit {
+  background-color: yellowgreen;
+  padding: 20px;
+}
+
+input,
+textarea {
+  display: block;
+  padding: 5px;
+}
