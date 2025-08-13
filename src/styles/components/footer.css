@@ -1,0 +1,124 @@
+/* Variables de color (puedes moverlas a global.css si ya tienes) */
+:root {
+  --footer-bg: #1e1e1e;
+  --footer-fg: #ffffff;
+  --footer-accent: #00bfff;
+  --footer-muted: #bdbdbd;
+  --footer-border: rgba(255, 255, 255, 0.12);
+}
+
+/* Soporte claro/oscuro automático si usas prefers-color-scheme */
+@media (prefers-color-scheme: light) {
+  :root {
+    --footer-bg: #111827;
+    --footer-fg: #f9fafb;
+    --footer-border: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+  border-top: 1px solid var(--footer-border);
+}
+
+.footer__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 16px;
+  display: grid;
+  gap: 14px;
+  align-items: center;
+  /* 1 col en móvil, 3 en desktop */
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .footer__container {
+    grid-template-columns: 1.2fr 1fr auto;
+  }
+}
+
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.footer__logo {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--footer-accent), #7dd3fc);
+  color: #0b1220;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.footer__text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--footer-muted);
+}
+
+.footer__link {
+  color: var(--footer-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: center;
+}
+
+.footer__navLink {
+  color: var(--footer-fg);
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.85;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.footer__navLink:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.footer__social {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.footer__iconLink {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.footer__iconLink:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.footer__icon {
+  font-size: 18px;
+  color: var(--footer-fg);
+  opacity: 0.95;
+}
