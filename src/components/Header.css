@@ -1,0 +1,76 @@
+/* Contenedor principal */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  background: #ffffffcc;
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+  backdrop-filter: blur(8px);
+}
+
+/* Logo */
+.brand__img {
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Acciones de autenticación */
+.auth-actions {
+  display: flex;
+  gap: .6rem;
+}
+
+/* Botón base */
+.btn {
+  display: inline-block;
+  padding: .55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+}
+
+/* Botón contorno */
+.btn-outline {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #cfd8dc;
+}
+
+.btn-outline:hover {
+  background: #f3f4f6;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+}
+
+/* Botón primario */
+.btn-primary {
+  background: linear-gradient(90deg, #2563eb, #1e3a8a);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, .4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #1d4ed8, #1e40af);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, .55);
+  transform: translateY(-1px);
+}
+
+.btn {
+  display: inline-flex;
+  /* 👈 para iconos + texto */
+  align-items: center;
+  /* 👈 centra verticalmente */
+  gap: 0.5rem;
+  /* espacio entre icono y texto */
+  padding: .55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+}

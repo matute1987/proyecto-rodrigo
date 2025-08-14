@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Layout } from "../components/Layout"
+import Layout from "../components/Layout"
 
 const NotFound = () => {
   return (
@@ -12,4 +12,4 @@ const NotFound = () => {
   )
 }
 
-export { NotFound }
+export default NotFound;

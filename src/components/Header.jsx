@@ -1,36 +1,51 @@
-import { Link } from "react-router-dom"
-import { useAuth } from "../context/UserContext"
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/UserContext";
+import { FaSignInAlt, FaUserPlus, FaSignOutAlt } from "react-icons/fa"; // 👈 iconos
+import "./Header.css";
 
-const Header = () => {
-  const { user, logout } = useAuth()
+export function Header() {
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    logout()
-  }
+    logout();
+  };
 
   return (
-    <header style={{ backgroundColor: "lightblue" }}>
-      <img src="https://frba.utn.edu.ar/wp-content/uploads/2016/08/logo-utn.ba-horizontal-e1471367724904.jpg" alt="imagen de logo" />
-      <nav>
-        <ul>
-          {/* Cambiar elementos a por componentes Link de react-router-dom */}
-          {
-            user && <>
-              <li><Link to="/">Inicio</Link></li>
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <button onClick={handleLogout}>Cerrar sesión</button>
-            </>
-          }
-          {
-            !user && <>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/registrate">Registrate</Link></li>
-            </>
-          }
-        </ul>
+    <header className="site-header">
+      {/* Logo */}
+      <Link to="/" className="brand">
+        <img
+          src="https://frba.utn.edu.ar/wp-content/uploads/2016/08/logo-utn.ba-horizontal-e471b517244000.jpg"
+          alt="Logo UTN.BA"
+          className="brand__img"
+        />
+      </Link>
+
+      {/* Acciones */}
+      <nav className="auth-actions">
+        {user ? (
+          <>
+            <Link to="/dashboard" className="btn btn-outline">
+              Dashboard
+            </Link>
+            <button onClick={handleLogout} className="btn btn-primary">
+              <FaSignOutAlt style={{ marginRight: "8px" }} />
+              Cerrar sesión
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="btn btn-outline">
+              <FaSignInAlt style={{ marginRight: "8px" }} />
+              Login
+            </Link>
+            <Link to="/register" className="btn btn-primary">
+              <FaUserPlus style={{ marginRight: "8px" }} />
+              Regístrate
+            </Link>
+          </>
+        )}
       </nav>
     </header>
-  )
+  );
 }
-
-export { Header }

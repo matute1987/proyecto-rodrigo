@@ -1,0 +1,145 @@
+/* ===== Layout principal ===== */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f3f4f6;
+  /* gris claro */
+}
+
+.auth-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Títulos ===== */
+.auth-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+  text-align: center;
+  color: #111827;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Grupos de inputs ===== */
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group.has-error input {
+  border-color: #ef4444;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  color: #374151;
+}
+
+/* ===== Wrapper de input con iconos ===== */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #2563eb;
+  /* azul */
+}
+
+.input-wrapper input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+/* ===== Ojo de contraseña ===== */
+.input-wrapper--with-btn {
+  position: relative;
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.eye-btn:hover {
+  color: #111827;
+}
+
+/* ===== Errores ===== */
+.error {
+  display: block;
+  font-size: 0.78rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+/* ===== Botón principal ===== */
+.auth-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.auth-submit:hover {
+  background: #1d4ed8;
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Enlace alternativo ===== */
+.auth-alt {
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 1.2rem;
+  color: #6b7280;
+}
+
+.auth-alt a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-alt a:hover {
+  text-decoration: underline;
+}
