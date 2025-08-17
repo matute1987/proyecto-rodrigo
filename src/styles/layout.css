@@ -1,0 +1,31 @@
+/* src/styles/layout.css */
+/* Estructura general */
+.app-shell {
+  min-height: 100svh;
+  /* full screen, soporta móviles */
+  display: flex;
+  flex-direction: column;
+  background: #0b1220;
+  /* mismo fondo que login */
+  color: #e6eefc;
+}
+
+/* El main ocupa todo entre header y footer */
+.layout-main {
+  flex: 1;
+  padding: 24px;
+}
+
+/* Centrado de páginas (login, notfound, etc.) */
+.layout-main.centered {
+  display: grid;
+  place-items: center;
+  /* centra vertical y horizontal */
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .layout-main {
+    padding: 16px;
+  }
+}

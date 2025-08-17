@@ -1,14 +1,14 @@
 
-import React from "react";
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 import "./Footer.css";
 
-const Footer = () => {
+export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="footer">
       <div className="footer__container">
+
         {/* Marca / copy */}
         <div className="footer__brand">
           <span className="footer__logo">RF</span>
@@ -40,7 +40,6 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
             className="footer__iconLink"
-            title="LinkedIn"
           >
             <FaLinkedin className="footer__icon" />
           </a>
@@ -51,7 +50,6 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="GitHub"
             className="footer__iconLink"
-            title="GitHub"
           >
             <FaGithub className="footer__icon" />
           </a>
@@ -60,7 +58,6 @@ const Footer = () => {
             href="mailto:tuemail@ejemplo.com"
             aria-label="Email"
             className="footer__iconLink"
-            title="Email"
           >
             <FaEnvelope className="footer__icon" />
           </a>
@@ -68,6 +65,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export { Footer };
+}

@@ -1,11 +1,14 @@
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import Footer from "./Footer";
+import Header from "./Header";
+import "../styles/layout.css";
 
-export default function Layout({ children }) {
+export default function Layout({ children, center = true }) {
   return (
-    <div className="Layout">
+    <div className="app-shell">
       <Header />
-      <main>{children}</main>
+      <main className={`layout-main ${center ? "centered" : ""}`}>
+        {children}
+      </main>
       <Footer />
     </div>
   );
