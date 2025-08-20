@@ -1,76 +1,250 @@
-/* Contenedor principal */
+:root {
+  --hdr-bg: #0f1629;
+  /* mismo tema que footer/login */
+  --hdr-fg: #e6eefc;
+  --hdr-muted: #9bb0d0;
+  --hdr-accent: #6aa6ff;
+  --hdr-border: rgba(255, 255, 255, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --hdr-bg: #f9fafb;
+    --hdr-fg: #111827;
+    --hdr-muted: #4b5563;
+    --hdr-accent: #2563eb;
+    --hdr-border: rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ---- Header ---- */
 .site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .75rem 1.25rem;
-  background: #ffffffcc;
-  border-bottom: 1px solid rgba(0, 0, 0, .06);
+  position: sticky;
+  top: 0;
+  z-index: 50;
   backdrop-filter: blur(8px);
+  background: color-mix(in oklab, var(--hdr-bg) 92%, transparent);
+  border-bottom: 1px solid var(--hdr-border);
 }
 
-/* Logo */
-.brand__img {
-  height: 40px;
-  object-fit: contain;
+.site-header__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: grid;
+  gap: 12px;
+  align-items: center;
+  grid-template-columns: 1fr auto auto auto;
+  /* brand | nav | actions | burger */
 }
 
-/* Acciones de autenticación */
-.auth-actions {
-  display: flex;
-  gap: .6rem;
-}
-
-/* Botón base */
-.btn {
-  display: inline-block;
-  padding: .55rem 1.2rem;
-  border-radius: 999px;
-  font-weight: 600;
+/* ---- Brand ---- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-size: 0.95rem;
+  color: var(--hdr-fg);
+  min-width: 0;
 }
 
-/* Botón contorno */
-.btn-outline {
-  background: #fff;
-  color: #374151;
-  border: 1px solid #cfd8dc;
+.brand__logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--hdr-accent), #7dd3fc);
+  color: #0b1220;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: .4px;
 }
 
-.btn-outline:hover {
-  background: #f3f4f6;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+.brand__name {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Botón primario */
-.btn-primary {
-  background: linear-gradient(90deg, #2563eb, #1e3a8a);
-  color: white;
-  border: none;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, .4);
+/* ---- Nav desktop ---- */
+.nav {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(90deg, #1d4ed8, #1e40af);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, .55);
+.nav__link {
+  color: var(--hdr-fg);
+  text-decoration: none;
+  font-size: 14px;
+  opacity: .9;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.nav__link:hover {
+  opacity: 1;
   transform: translateY(-1px);
+}
+
+/* ---- Actions desktop ---- */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-self: end;
 }
 
 .btn {
   display: inline-flex;
-  /* 👈 para iconos + texto */
   align-items: center;
-  /* 👈 centra verticalmente */
-  gap: 0.5rem;
-  /* espacio entre icono y texto */
-  padding: .55rem 1.2rem;
-  border-radius: 999px;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.25s ease;
-  font-size: 0.95rem;
+  border: 1px solid transparent;
+  color: var(--hdr-fg);
+  background: transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--hdr-accent), color-mix(in oklab, var(--hdr-accent), #000 20%));
+  color: #0b1220;
+  box-shadow: 0 6px 16px rgba(106, 166, 255, .25);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-outline {
+  border-color: color-mix(in oklab, var(--hdr-fg), transparent 80%);
+}
+
+.btn-outline:hover {
+  border-color: color-mix(in oklab, var(--hdr-fg), transparent 60%);
+}
+
+/* ---- Hamburguesa ---- */
+.hamburger {
+  display: none;
+  /* visible solo en mobile */
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in oklab, var(--hdr-fg), transparent 80%);
+  background: transparent;
+  color: var(--hdr-fg);
+  cursor: pointer;
+  justify-self: end;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  margin: 7px 10px;
+  background: var(--hdr-fg);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ---- Panel móvil ---- */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: color-mix(in oklab, var(--hdr-bg) 96%, transparent);
+  border-bottom: 1px solid var(--hdr-border);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+  transform-origin: top;
+  transform: scaleY(0.96);
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.mobile-menu.open {
+  display: block;
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.mobile-menu_nav,
+.mobile-menu_actions {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: center;
+}
+
+.mobile-link {
+  color: var(--hdr-fg);
+  text-decoration: none;
+  font-size: 16px;
+  opacity: .95;
+}
+
+.mobile-link:hover {
+  text-decoration: underline;
+}
+
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 120px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  color: var(--hdr-fg);
+  background: transparent;
+}
+
+.m-btn-primary {
+  background: linear-gradient(180deg, var(--hdr-accent), color-mix(in oklab, var(--hdr-accent), #000 20%));
+  color: #0b1220;
+  box-shadow: 0 6px 16px rgba(106, 166, 255, .25);
+}
+
+.m-btn-outline {
+  border-color: color-mix(in oklab, var(--hdr-fg), transparent 80%);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 719px) {
+
+  .nav,
+  .actions {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .site-header__container {
+    grid-template-columns: 1fr auto;
+  }
 }

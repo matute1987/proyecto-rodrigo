@@ -1,0 +1,230 @@
+/* ------ Variables base (compatibles con tu tema oscuro) ------ */
+:root {
+  --page-bg: #0b1220;
+  /* fondo general oscuro */
+  --card-bg: #ffffff;
+  /* tarjeta clara */
+  --text-strong: #111827;
+  --text-muted: #6b7280;
+  --brand: #2563eb;
+  --border: #e5e7eb;
+  --focus: #1d4ed8;
+  --danger-bg: #fee2e2;
+  --danger-fg: #991b1b;
+}
+
+/* ------ Layout general ------ */
+.login {
+  min-height: calc(100dvh - 140px);
+  /* deja lugar para header+footer */
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background: radial-gradient(80% 60% at 50% 0%, rgba(37, 99, 235, .18), transparent 60%),
+    var(--page-bg);
+}
+
+.login__wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login__header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.login__title {
+  margin: 0 0 6px;
+  color: #f9fafb;
+  font-size: clamp(22px, 2.8vw, 26px);
+  font-weight: 800;
+}
+
+.login__subtitle {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+/* ------ Tarjeta ------ */
+.login__box {
+  background: var(--card-bg);
+  color: var(--text-strong);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+}
+
+/* Alert */
+.login__alert {
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+/* Campos */
+.login__field {
+  margin-bottom: 14px;
+}
+
+.login__field label {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* Input estilizado */
+.input {
+  position: relative;
+  display: grid;
+  align-items: center;
+}
+
+.input input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+  color: var(--text-strong);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.input input::placeholder {
+  color: #9ca3af;
+}
+
+.input input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .18);
+}
+
+/* Ícono y toggle */
+.input--withIcon .input__icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: .8;
+}
+
+.input--withIcon input {
+  padding-left: 34px;
+}
+
+.input__toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.input__toggle:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Fila inferior */
+.login__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 14px;
+  gap: 12px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  color: var(--text-strong);
+  font-size: 14px;
+}
+
+.check input {
+  accent-color: var(--brand);
+}
+
+.login__link {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.login__link:hover {
+  text-decoration: underline;
+}
+
+/* Botón */
+.btn {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.btn--primary {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, .35);
+}
+
+.btn--primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn--primary:active {
+  transform: translateY(1px);
+}
+
+.btn[disabled] {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+.login__alt {
+  text-align: center;
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Accesibilidad */
+.login a:focus-visible,
+.login button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .btn,
+  .input input {
+    transition: none !important;
+  }
+}
