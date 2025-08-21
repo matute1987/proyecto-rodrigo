@@ -248,3 +248,74 @@
     grid-template-columns: 1fr auto;
   }
 }
+
+/* ==== FIX: nombres BEM correctos para el panel móvil ==== */
+.mobile-menu__nav,
+.mobile-menu__actions {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: center;
+}
+
+/* Si querés mantener también las variantes con un guion bajo por compat: */
+.mobile-menu_nav,
+.mobile-menu_actions {
+  all: unset;
+}
+
+/* ==== BACKDROP (oscurecer fondo y capturar clic) ==== */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+  z-index: 45;
+}
+
+.backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==== CAPAS Y APERTURA DEL MENÚ MÓVIL ==== */
+.site-header {
+  z-index: 50;
+}
+
+/* barra */
+.mobile-menu {
+  z-index: 60;
+}
+
+/* panel por encima del backdrop */
+.mobile-menu.open {
+  display: block;
+}
+
+@media (max-width: 719px) {
+
+  /* separa el hero para que no se pegue al header sticky */
+  .site-header+* {
+    margin-top: 12px;
+  }
+}
+
+/* ==== Accesibilidad: focus visible en header ==== */
+.site-header a:focus-visible,
+.site-header button:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--hdr-accent), white 15%);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Opcional: estado activo en desktop */
+.nav__link.is-active {
+  color: var(--hdr-accent);
+  text-decoration: none;
+}
