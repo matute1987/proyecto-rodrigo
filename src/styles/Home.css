@@ -224,3 +224,131 @@
     grid-template-columns: 1fr
   }
 }
+
+/* ===== Mobile polish ===== */
+@media (max-width: 480px) {
+
+  /* Header */
+  .header_right-empty,
+  .header_ghost {
+    display: none;
+    /* oculta el cuadrado vacío */
+  }
+
+  .header__user {
+    gap: 8px;
+  }
+
+  /* Hero card */
+  .hero {
+    padding: 16px 14px;
+  }
+
+  .hero__title {
+    font-size: clamp(20px, 6vw, 28px);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.35;
+  }
+
+  /* Títulos de sección */
+  .section__title {
+    font-size: clamp(18px, 5.5vw, 24px);
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+
+  .section__subtitle {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  /* Filtros: buscador + select */
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* apila */
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .filters input[type="search"],
+  .filters select {
+    width: 100%;
+    font-size: 16px;
+    /* evita zoom en iOS */
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .filters select {
+    appearance: none;
+    /* quita flecha azul iOS */
+    -webkit-appearance: none;
+    background-color: #0b1220;
+    /* adapta a tu tema */
+    color: #e6eefc;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background-image: none;
+    /* elimina ícono del SO */
+  }
+
+  /* Grid de productos */
+  .products {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* 1 col en XS */
+    gap: 12px;
+  }
+
+  @media (min-width: 380px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 2 cols */
+  }
+
+  .productCard {
+    border-radius: 14px;
+    padding: 10px;
+  }
+
+  .productCard__title {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .productCard__price {
+    font-size: 15px;
+  }
+
+  /* Hit areas cómodas */
+  .btn,
+  .link-btn,
+  .chip {
+    min-height: 44px;
+  }
+}
+
+/* Tap highlight y scroll suave en iOS */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Si usás inputs/labels globales */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* evita zoom */

@@ -143,3 +143,74 @@
 .auth-alt a:hover {
   text-decoration: underline;
 }
+
+/* ===== Variantes de tema ===== */
+.auth--light {
+  background: #f3f4f6;
+  /* ya lo usabas */
+}
+
+.auth--light .auth-card {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+}
+
+.auth--light .auth-title {
+  color: #111827;
+}
+
+.auth--light .auth-subtitle {
+  color: #6b7280;
+}
+
+/* Tema oscuro consistente (opcional) */
+.auth--dark {
+  /* degradé sutil + base oscura */
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(37, 99, 235, .16), transparent 60%),
+    #0b1220;
+}
+
+.auth--dark .auth-card {
+  background: #0f1629;
+  color: #e6eefc;
+  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.auth--dark .auth-title {
+  color: #e6eefc;
+}
+
+.auth--dark .auth-subtitle {
+  color: #9bb0d0;
+}
+
+/* Inputs y botón se adaptan sin cambiar tu estructura */
+.auth--dark .input-wrapper {
+  background: #0b1220;
+  border: 1px solid rgba(255, 255, 255, .12);
+}
+
+.auth--dark .input-wrapper:focus-within {
+  border-color: #6aa6ff;
+}
+
+.auth--dark .input-wrapper input {
+  color: #e6eefc;
+}
+
+.auth--dark .input-wrapper input::placeholder {
+  color: #9bb0d0;
+}
+
+.auth--dark .auth-submit {
+  background: #2563eb;
+  color: #fff;
+}
+
+.auth--dark .auth-submit:hover {
+  background: #1d4ed8;
+}

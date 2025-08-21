@@ -1,148 +1,88 @@
-import { useEffect, useState } from "react";
-import Layout from "../components/Layout";
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "../context/UserContext";
-import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/Login.css"; // usa el CSS que te pasé antes
+import AuthLayout from "../components/AuthLayout";
+import "../styles/Auth.css";
 
 export default function Login() {
   const [username, setUsername] = useState(localStorage.getItem("lastUser") || "");
   const [password, setPassword] = useState("");
-  const [showPass, setShowPass] = useState(false);
+  const [show, setShow] = useState(false);
   const [remember, setRemember] = useState(Boolean(localStorage.getItem("lastUser")));
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  // si venías de una ruta protegida, redirige allí
-  const redirectTo = location.state?.from || "/";
+  const { state } = useLocation();
 
-  useEffect(() => {
-    setError("");
-  }, [username, password]);
-
-  const handleLogin = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
     if (!username.trim() || !password.trim()) {
-      setError("Completá usuario y contraseña.");
-      return;
+      setError("Completá usuario y contraseña."); return;
     }
-    if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres.");
-      return;
-    }
-
     try {
       setLoading(true);
-      // tu login debe devolver true/false o lanzar error; cubrimos ambas
-      const ok = await Promise.resolve(login(username, password));
-      if (ok) {
-        if (remember) localStorage.setItem("lastUser", username);
-        else localStorage.removeItem("lastUser");
-        setUsername("");
-        setPassword("");
-        navigate(redirectTo, { replace: true });
-      } else {
-        setError("Usuario o contraseña inválidos.");
-      }
+      const ok = await login(username, password);
+      if (!ok) return setError("Usuario o contraseña inválidos.");
+      remember ? localStorage.setItem("lastUser", username) : localStorage.removeItem("lastUser");
+      navigate(state?.from || "/", { replace: true });
     } catch (err) {
-      // si tu login lanza error con message, lo mostramos
-      setError(err?.message || "No se pudo iniciar sesión. Probá de nuevo.");
+      setError(err?.message || "No se pudo iniciar sesión.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Layout>
-      <main className="login" role="main">
-        <section className="login__wrap">
-          <header className="login__header">
-            <h1 className="login__title">Inicia sesión</h1>
-            <p className="login__subtitle">Hola, bienvenido de nuevo</p>
-          </header>
+    <AuthLayout
+      title="Inicia sesión"
+      subtitle="Hola, bienvenido de nuevo"
+      theme="dark"              // o "light" si preferís
+    >
+      {error && <div className="error" role="alert">{error}</div>}
 
-          <form className="login__box" onSubmit={handleLogin} noValidate>
-            {error && (
-              <div className="login__alert" role="alert">
-                {error}
-              </div>
-            )}
+      <form onSubmit={onSubmit} noValidate>
+        <div className="input-group">
+          <label htmlFor="user">Nombre de usuario</label>
+          <div className="input-wrapper">
+            <FaUser aria-hidden="true" />
+            <input id="user" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />
+          </div>
+        </div>
 
-            <div className="login__field">
-              <label htmlFor="username">Nombre de usuario</label>
-              <div className="input input--withIcon">
-                <span className="input__icon" aria-hidden="true">👤</span>
-                <input
-                  id="username"
-                  type="text"
-                  autoComplete="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="tu-usuario"
-                  required
-                  autoFocus
-                />
-              </div>
-            </div>
-
-            <div className="login__field">
-              <label htmlFor="password">Contraseña</label>
-              <div className="input input--withIcon">
-                <span className="input__icon" aria-hidden="true">🔒</span>
-                <input
-                  id="password"
-                  type={showPass ? "text" : "password"}
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                  minLength={6}
-                />
-                <button
-                  type="button"
-                  className="input__toggle"
-                  aria-label={showPass ? "Ocultar contraseña" : "Mostrar contraseña"}
-                  onClick={() => setShowPass((s) => !s)}
-                >
-                  {showPass ? "🙈" : "👁"}
-                </button>
-              </div>
-            </div>
-
-            <div className="login__row">
-              <label className="check">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={(e) => setRemember(e.target.checked)}
-                />
-                <span>Recordarme</span>
-              </label>
-
-              <a href="/recuperar" className="login__link">
-                ¿Olvidaste tu contraseña?
-              </a>
-            </div>
-
-            <button
-              className="btn btn--primary"
-              type="submit"
-              disabled={loading}
-              aria-busy={loading}
-            >
-              {loading ? "Ingresando…" : "Ingresar"}
+        <div className="input-group">
+          <label htmlFor="pass">Contraseña</label>
+          <div className="input-wrapper input-wrapper--with-btn">
+            <FaLock aria-hidden="true" />
+            <input
+              id="pass"
+              type={show ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+            />
+            <button type="button" className="eye-btn" onClick={() => setShow(s => !s)}>
+              {show ? <FaEyeSlash /> : <FaEye />}
             </button>
+          </div>
+        </div>
 
-            <p className="login__alt">
-              ¿No tenés cuenta?{" "}
-              <a href="/register" className="login__link">Registrate</a>
-            </p>
-          </form>
-        </section>
-      </main>
-    </Layout>
+        <div className="auth-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "6px 0 12px" }}>
+          <label style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
+            <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
+            Recordarme
+          </label>
+          <Link className="auth-link" to="/recuperar">¿Olvidaste tu contraseña?</Link>
+        </div>
+
+        <button className="auth-submit" disabled={loading} aria-busy={loading}>
+          {loading ? "Ingresando…" : "Ingresar"}
+        </button>
+
+        <p className="auth-alt">¿No tenés cuenta? <Link to="/register">Registrate</Link></p>
+      </form>
+    </AuthLayout>
   );
 }
