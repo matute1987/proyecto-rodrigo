@@ -15,22 +15,28 @@ export default function Register() {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
-  // visibilidad de contraseñas
   const [showPwd, setShowPwd] = useState(false);
   const [showPwd2, setShowPwd2] = useState(false);
 
   const onChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
+    const { name, value } = e.target;
+    const v = name === "email" ? value.toLowerCase() : value;
+    setForm((f) => ({ ...f, [name]: v }));
+    setErrors((prev) => ({ ...prev, [name]: "" })); // limpia error del campo
   };
 
   const validate = () => {
+    const f = {
+      username: form.username.trim(),
+      email: form.email.trim(),
+      password: form.password,
+      confirm_password: form.confirm_password,
+    };
     const errs = {};
-    if (!form.username.trim()) errs.username = "Ingresá un nombre de usuario.";
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) errs.email = "Correo inválido.";
-    if (form.password.length < 6) errs.password = "Mínimo 6 caracteres.";
-    if (form.confirm_password !== form.password)
+    if (!f.username) errs.username = "Ingresá un nombre de usuario.";
+    if (!/^\S+@\S+\.\S+$/.test(f.email)) errs.email = "Correo inválido.";
+    if (f.password.length < 6) errs.password = "Mínimo 6 caracteres.";
+    if (f.confirm_password !== f.password)
       errs.confirm_password = "Las contraseñas no coinciden.";
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -38,13 +44,16 @@ export default function Register() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
     if (!validate()) return;
 
     try {
       setLoading(true);
-      // 👉 aquí iría tu llamada a API real
+      // TODO: llamada real a tu API/register(...)
       await new Promise((r) => setTimeout(r, 700));
       navigate("/login");
+    } catch (err) {
+      setErrors((prev) => ({ ...prev, general: err?.message || "No se pudo registrar." }));
     } finally {
       setLoading(false);
     }
@@ -52,13 +61,19 @@ export default function Register() {
 
   return (
     <main className="auth-container" aria-labelledby="registerTitle">
-      <section className="auth-card">
+      <section className="auth-card" role="region" aria-describedby="registerHint">
         <h1 id="registerTitle" className="auth-title">Crear cuenta</h1>
-        <p className="auth-subtitle">
+        <p id="registerHint" className="auth-subtitle">
           Hola, ¡bienvenido! Completá tus datos para registrarte.
         </p>
 
         <form onSubmit={onSubmit} noValidate>
+          {errors.general && (
+            <span className="error" role="alert" aria-live="polite">
+              {errors.general}
+            </span>
+          )}
+
           {/* Usuario */}
           <div className={`input-group ${errors.username ? "has-error" : ""}`}>
             <label htmlFor="username">Usuario</label>
@@ -72,9 +87,11 @@ export default function Register() {
                 value={form.username}
                 onChange={onChange}
                 autoComplete="username"
+                aria-invalid={Boolean(errors.username)}
+                aria-describedby={errors.username ? "err-username" : undefined}
               />
             </div>
-            {errors.username && <span className="error">{errors.username}</span>}
+            {errors.username && <span id="err-username" className="error">{errors.username}</span>}
           </div>
 
           {/* Email */}
@@ -89,10 +106,13 @@ export default function Register() {
                 placeholder="tu@email.com"
                 value={form.email}
                 onChange={onChange}
+                inputMode="email"
                 autoComplete="email"
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? "err-email" : undefined}
               />
             </div>
-            {errors.email && <span className="error">{errors.email}</span>}
+            {errors.email && <span id="err-email" className="error">{errors.email}</span>}
           </div>
 
           {/* Password */}
@@ -108,6 +128,9 @@ export default function Register() {
                 value={form.password}
                 onChange={onChange}
                 autoComplete="new-password"
+                minLength={6}
+                aria-invalid={Boolean(errors.password)}
+                aria-describedby={errors.password ? "err-password" : undefined}
               />
               <button
                 type="button"
@@ -118,7 +141,7 @@ export default function Register() {
                 {showPwd ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {errors.password && <span className="error">{errors.password}</span>}
+            {errors.password && <span id="err-password" className="error">{errors.password}</span>}
           </div>
 
           {/* Confirmación */}
@@ -134,6 +157,8 @@ export default function Register() {
                 value={form.confirm_password}
                 onChange={onChange}
                 autoComplete="new-password"
+                aria-invalid={Boolean(errors.confirm_password)}
+                aria-describedby={errors.confirm_password ? "err-confirm" : undefined}
               />
               <button
                 type="button"
@@ -144,12 +169,15 @@ export default function Register() {
                 {showPwd2 ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {errors.confirm_password && (
-              <span className="error">{errors.confirm_password}</span>
-            )}
+            {errors.confirm_password && <span id="err-confirm" className="error">{errors.confirm_password}</span>}
           </div>
 
-          <button className="btn btn-primary auth-submit" disabled={loading}>
+          <button
+            type="submit"
+            className="auth-submit"
+            disabled={loading}
+            aria-busy={loading}
+          >
             {loading ? "Creando..." : "Crear cuenta"}
           </button>
         </form>
