@@ -319,3 +319,67 @@
   color: var(--hdr-accent);
   text-decoration: none;
 }
+
+/* ====== Hamburguesa: área táctil + animación suave ====== */
+.hamburger {
+  /* área táctil cómoda en móvil/desktop táctil */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  /* aumenta hit-area sin deformar el ícono */
+  display: inline-grid;
+  place-items: center;
+  gap: 6px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in oklab, var(--hdr-fg), transparent 80%);
+  background: transparent;
+  color: var(--hdr-fg);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.hamburger:hover {
+  background: color-mix(in oklab, var(--hdr-fg), transparent 90%);
+}
+
+.hamburger:active {
+  transform: translateY(1px);
+}
+
+/* barras */
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition:
+    transform .22s cubic-bezier(.4, 0, .2, 1),
+    opacity .18s ease,
+    width .22s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform, opacity, width;
+}
+
+/* estado abierto -> “X” */
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  width: 22px;
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  width: 22px;
+}
+
+/* Reduce motion: sin animaciones */
+@media (prefers-reduced-motion: reduce) {
+
+  .hamburger,
+  .hamburger span {
+    transition: none !important;
+  }
+}
